@@ -1,0 +1,29 @@
+{
+  "name": "mogu-graph",
+  "version": "0.1.0",
+  "description": "A subgraph that indexes nouns events, forked from Nouns Subgraph",
+  "author": "martin",
+  "homepage": "https://nouns.wtf",
+  "license": "GPL-3.0",
+  "main": "build/index.js",
+  "directories": {
+    "src": "src"
+  },
+  "scripts": {
+    "build": "graph build",
+    "deploy": "graph deploy --node https://api.studio.thegraph.com/deploy/ propdates",
+    "create-local": "graph create --node http://localhost:8020/ propdates",
+    "remove-local": "graph remove --node http://localhost:8020/ propdates",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 propdates",
+    "test": "graph test",
+    "codegen": "graph codegen --output-dir src/types/",
+    "test:configgen": "echo libsFolder: $(dirname `cd ../..; pwd`)/nouns-monorepo/node_modules > matchstick.yaml",
+    "create:localnode": "graph create --node http://localhost:8020/"
+  },
+  "devDependencies": {
+    "@graphprotocol/graph-cli": "0.47.1",
+    "@graphprotocol/graph-ts": "0.31.0",
+    "mustache": "4.2.0",
+    "matchstick-as": "0.5.0"
+  }
+}
