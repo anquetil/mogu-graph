@@ -17,7 +17,6 @@
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 propdates",
     "test": "graph test",
     "codegen": "graph codegen --output-dir src/types/",
-    "test:configgen": "echo libsFolder: $(dirname `cd ../..; pwd`)/nouns-monorepo/node_modules > matchstick.yaml",
     "create:localnode": "graph create --node http://localhost:8020/"
   },
   "devDependencies": {

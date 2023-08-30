@@ -1,3 +1,162 @@
+interface CustomEvent @entity {
+   "Unique id (hash + TBD)"
+   id: ID!
+
+   "Hash"
+   hash: Bytes!
+
+   "Block Number"
+   block: BigInt!
+
+   "Timestamp of Block"
+   timestamp: BigInt!
+
+   "Originator of action"
+   from: Bytes!
+
+   "Optional: to"
+   to: Bytes
+}
+
+type CustomVoteEvent implements CustomEvent @entity {
+   "Unique id (hash + prop)"
+   id: ID!
+
+   "Hash"
+   hash: Bytes!
+
+   "Block Number"
+   block: BigInt!
+
+   "Timestamp of Block"
+   timestamp: BigInt!
+
+   "Originator of action"
+   from: Bytes!
+
+   "Optional: to"
+   to: Bytes
+
+   "proposal ID"
+   prop: BigInt!
+
+   "vote reasoning"
+   reason: String
+
+   "The integer support value: against (0), for (1), or abstain (2)"
+   supportDetailed: Int!
+
+   "number of votes"
+   votes: BigInt!
+}
+
+type CustomBidEvent implements CustomEvent @entity {
+   "Unique id (hash + Noun)"
+   id: ID!
+
+   "Hash"
+   hash: Bytes!
+
+   "Block Number"
+   block: BigInt!
+
+   "Timestamp of Block"
+   timestamp: BigInt!
+
+   "Originator of action"
+   from: Bytes!
+
+   "Optional: to"
+   to: Bytes
+
+   "amount bidding"
+   amount: BigInt!
+
+   "Noun being bid on"
+   noun: BigInt!
+}
+
+type CustomWonAuctionEvent implements CustomEvent @entity {
+   "Unique id (hash + 'w' + Noun)"
+   id: ID!
+
+   "Hash"
+   hash: Bytes!
+
+   "Block Number"
+   block: BigInt!
+
+   "Timestamp of Block"
+   timestamp: BigInt!
+
+   "Originator of action"
+   from: Bytes!
+
+   "Optional: to"
+   to: Bytes
+
+   "amount paid for"
+   amount: BigInt!
+
+   "Noun bought"
+   noun: BigInt!
+}
+
+type CustomTransferEvent implements CustomEvent @entity {
+   "Unique id (hash + 't' + noun)"
+   id: ID!
+
+   "Hash"
+   hash: Bytes!
+
+   "Block Number"
+   block: BigInt!
+
+   "Timestamp of Block"
+   timestamp: BigInt!
+
+   "Originator of action"
+   from: Bytes!
+
+   "Required: to"
+   to: Bytes
+
+   "noun id"
+   noun: BigInt!
+}
+
+type CustomDelegateEvent implements CustomEvent @entity {
+   "Unique id (hash + votes)"
+   id: ID!
+
+   "Hash"
+   hash: Bytes!
+
+   "Block Number"
+   block: BigInt!
+
+   "Timestamp of Block"
+   timestamp: BigInt!
+
+   "Originator of action"
+   from: Bytes!
+
+   "optional"
+   to: Bytes
+
+   "old delegate"
+   oldDelegate: Bytes!
+
+   "new delegate"
+   newDelegate: Bytes!
+
+   "# of votes delegated"
+   votes: BigInt!
+}
+
+
+"END MOGU CUSTOM TYPES"
+
 type DelegationEvent @entity {
   "The txn hash of this event + nounId"
   id: ID!

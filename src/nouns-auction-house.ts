@@ -5,7 +5,7 @@ import {
   AuctionExtended,
   AuctionSettled,
 } from './types/NounsAuctionHouse/NounsAuctionHouse';
-import { Auction, Noun, Bid } from './types/schema';
+import { Auction, Noun, Bid, CustomBidEvent, CustomWonAuctionEvent } from './types/schema';
 import { getOrCreateAccount } from './utils/helpers';
 
 export function handleAuctionCreated(event: AuctionCreated): void {
@@ -48,6 +48,22 @@ export function handleAuctionBid(event: AuctionBid): void {
   auction.bidder = bidder.id;
   auction.save();
 
+   /* BID CODE */
+   let customBid = new CustomBidEvent(event.transaction.hash
+      .toHexString()
+      .concat('-')
+      .concat(event.params.nounId.toString()));
+
+   customBid.hash = event.transaction.hash
+   customBid.block = event.block.number
+   customBid.timestamp = event.block.timestamp
+   customBid.from = event.params.sender
+   customBid.amount = event.params.value
+   customBid.noun = event.params.nounId
+
+   customBid.save()
+   /* END MOGU CODE */
+
   // Save Bid
   let bid = new Bid(event.transaction.hash.toHex());
   bid.bidder = bidder.id;
@@ -87,6 +103,23 @@ export function handleAuctionSettled(event: AuctionSettled): void {
     ]);
     return;
   }
+
+   /* AUCTION SETTLED CODE */
+   let customWon = new CustomWonAuctionEvent(event.transaction.hash
+      .toHexString()
+      .concat('-w-')
+      .concat(event.params.nounId.toString()));
+
+   customWon.hash = event.transaction.hash
+   customWon.block = event.block.number
+   customWon.timestamp = event.block.timestamp
+   customWon.from = event.params.winner
+   customWon.amount = event.params.amount
+   customWon.noun = event.params.nounId
+
+   customWon.save()
+   /* END MOGU CODE */
+
 
   auction.settled = true;
   auction.save();

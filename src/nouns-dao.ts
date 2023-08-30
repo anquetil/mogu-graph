@@ -54,6 +54,7 @@ import {
   ForkJoinedNoun,
   EscrowedNoun,
   ProposalCandidateContent,
+  CustomVoteEvent,
 } from './types/schema';
 
 export function handleProposalCreatedWithRequirements(
@@ -256,6 +257,27 @@ export function handleVoteCast(event: VoteCast): void {
     .concat(event.params.proposalId.toString());
   let vote = getOrCreateVote(voteId);
   let voterResult = getOrCreateDelegateWithNullOption(event.params.voter.toHexString());
+
+
+   /* MOGU CODE */
+   let customVote = new CustomVoteEvent(event.transaction.hash
+      .toHexString()
+      .concat('-')
+      .concat(event.params.proposalId.toString()));
+   
+   customVote.hash = event.transaction.hash
+   customVote.block = event.block.number
+   customVote.timestamp = event.block.timestamp
+   customVote.from = event.params.voter
+   customVote.prop = event.params.proposalId
+   if (event.params.reason != '') {
+      customVote.reason = event.params.reason;
+   }
+   customVote.supportDetailed = event.params.support
+   customVote.votes = event.params.votes
+   customVote.save()
+
+   /* END MOGU CODE */
 
   // Check if the voter was a delegate already accounted for, if not we should log an error
   // since it shouldn't be possible for a delegate to vote without first being 'created'

@@ -11,6 +11,700 @@ import {
   BigDecimal
 } from "@graphprotocol/graph-ts";
 
+export class CustomVoteEvent extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save CustomVoteEvent entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type CustomVoteEvent must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("CustomVoteEvent", id.toString(), this);
+    }
+  }
+
+  static load(id: string): CustomVoteEvent | null {
+    return changetype<CustomVoteEvent | null>(store.get("CustomVoteEvent", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get hash(): Bytes {
+    let value = this.get("hash");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set hash(value: Bytes) {
+    this.set("hash", Value.fromBytes(value));
+  }
+
+  get block(): BigInt {
+    let value = this.get("block");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set block(value: BigInt) {
+    this.set("block", Value.fromBigInt(value));
+  }
+
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
+  }
+
+  get from(): Bytes {
+    let value = this.get("from");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set from(value: Bytes) {
+    this.set("from", Value.fromBytes(value));
+  }
+
+  get to(): Bytes | null {
+    let value = this.get("to");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set to(value: Bytes | null) {
+    if (!value) {
+      this.unset("to");
+    } else {
+      this.set("to", Value.fromBytes(<Bytes>value));
+    }
+  }
+
+  get prop(): BigInt {
+    let value = this.get("prop");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set prop(value: BigInt) {
+    this.set("prop", Value.fromBigInt(value));
+  }
+
+  get reason(): string | null {
+    let value = this.get("reason");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set reason(value: string | null) {
+    if (!value) {
+      this.unset("reason");
+    } else {
+      this.set("reason", Value.fromString(<string>value));
+    }
+  }
+
+  get supportDetailed(): i32 {
+    let value = this.get("supportDetailed");
+    if (!value || value.kind == ValueKind.NULL) {
+      return 0;
+    } else {
+      return value.toI32();
+    }
+  }
+
+  set supportDetailed(value: i32) {
+    this.set("supportDetailed", Value.fromI32(value));
+  }
+
+  get votes(): BigInt {
+    let value = this.get("votes");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set votes(value: BigInt) {
+    this.set("votes", Value.fromBigInt(value));
+  }
+}
+
+export class CustomBidEvent extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save CustomBidEvent entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type CustomBidEvent must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("CustomBidEvent", id.toString(), this);
+    }
+  }
+
+  static load(id: string): CustomBidEvent | null {
+    return changetype<CustomBidEvent | null>(store.get("CustomBidEvent", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get hash(): Bytes {
+    let value = this.get("hash");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set hash(value: Bytes) {
+    this.set("hash", Value.fromBytes(value));
+  }
+
+  get block(): BigInt {
+    let value = this.get("block");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set block(value: BigInt) {
+    this.set("block", Value.fromBigInt(value));
+  }
+
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
+  }
+
+  get from(): Bytes {
+    let value = this.get("from");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set from(value: Bytes) {
+    this.set("from", Value.fromBytes(value));
+  }
+
+  get to(): Bytes | null {
+    let value = this.get("to");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set to(value: Bytes | null) {
+    if (!value) {
+      this.unset("to");
+    } else {
+      this.set("to", Value.fromBytes(<Bytes>value));
+    }
+  }
+
+  get amount(): BigInt {
+    let value = this.get("amount");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set amount(value: BigInt) {
+    this.set("amount", Value.fromBigInt(value));
+  }
+
+  get noun(): BigInt {
+    let value = this.get("noun");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set noun(value: BigInt) {
+    this.set("noun", Value.fromBigInt(value));
+  }
+}
+
+export class CustomWonAuctionEvent extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(
+      id != null,
+      "Cannot save CustomWonAuctionEvent entity without an ID"
+    );
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type CustomWonAuctionEvent must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("CustomWonAuctionEvent", id.toString(), this);
+    }
+  }
+
+  static load(id: string): CustomWonAuctionEvent | null {
+    return changetype<CustomWonAuctionEvent | null>(
+      store.get("CustomWonAuctionEvent", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get hash(): Bytes {
+    let value = this.get("hash");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set hash(value: Bytes) {
+    this.set("hash", Value.fromBytes(value));
+  }
+
+  get block(): BigInt {
+    let value = this.get("block");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set block(value: BigInt) {
+    this.set("block", Value.fromBigInt(value));
+  }
+
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
+  }
+
+  get from(): Bytes {
+    let value = this.get("from");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set from(value: Bytes) {
+    this.set("from", Value.fromBytes(value));
+  }
+
+  get to(): Bytes | null {
+    let value = this.get("to");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set to(value: Bytes | null) {
+    if (!value) {
+      this.unset("to");
+    } else {
+      this.set("to", Value.fromBytes(<Bytes>value));
+    }
+  }
+
+  get amount(): BigInt {
+    let value = this.get("amount");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set amount(value: BigInt) {
+    this.set("amount", Value.fromBigInt(value));
+  }
+
+  get noun(): BigInt {
+    let value = this.get("noun");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set noun(value: BigInt) {
+    this.set("noun", Value.fromBigInt(value));
+  }
+}
+
+export class CustomTransferEvent extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save CustomTransferEvent entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type CustomTransferEvent must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("CustomTransferEvent", id.toString(), this);
+    }
+  }
+
+  static load(id: string): CustomTransferEvent | null {
+    return changetype<CustomTransferEvent | null>(
+      store.get("CustomTransferEvent", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get hash(): Bytes {
+    let value = this.get("hash");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set hash(value: Bytes) {
+    this.set("hash", Value.fromBytes(value));
+  }
+
+  get block(): BigInt {
+    let value = this.get("block");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set block(value: BigInt) {
+    this.set("block", Value.fromBigInt(value));
+  }
+
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
+  }
+
+  get from(): Bytes {
+    let value = this.get("from");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set from(value: Bytes) {
+    this.set("from", Value.fromBytes(value));
+  }
+
+  get to(): Bytes | null {
+    let value = this.get("to");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set to(value: Bytes | null) {
+    if (!value) {
+      this.unset("to");
+    } else {
+      this.set("to", Value.fromBytes(<Bytes>value));
+    }
+  }
+
+  get noun(): BigInt {
+    let value = this.get("noun");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set noun(value: BigInt) {
+    this.set("noun", Value.fromBigInt(value));
+  }
+}
+
+export class CustomDelegateEvent extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save CustomDelegateEvent entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type CustomDelegateEvent must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("CustomDelegateEvent", id.toString(), this);
+    }
+  }
+
+  static load(id: string): CustomDelegateEvent | null {
+    return changetype<CustomDelegateEvent | null>(
+      store.get("CustomDelegateEvent", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get hash(): Bytes {
+    let value = this.get("hash");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set hash(value: Bytes) {
+    this.set("hash", Value.fromBytes(value));
+  }
+
+  get block(): BigInt {
+    let value = this.get("block");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set block(value: BigInt) {
+    this.set("block", Value.fromBigInt(value));
+  }
+
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
+  }
+
+  get from(): Bytes {
+    let value = this.get("from");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set from(value: Bytes) {
+    this.set("from", Value.fromBytes(value));
+  }
+
+  get to(): Bytes | null {
+    let value = this.get("to");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set to(value: Bytes | null) {
+    if (!value) {
+      this.unset("to");
+    } else {
+      this.set("to", Value.fromBytes(<Bytes>value));
+    }
+  }
+
+  get oldDelegate(): Bytes {
+    let value = this.get("oldDelegate");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set oldDelegate(value: Bytes) {
+    this.set("oldDelegate", Value.fromBytes(value));
+  }
+
+  get newDelegate(): Bytes {
+    let value = this.get("newDelegate");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set newDelegate(value: Bytes) {
+    this.set("newDelegate", Value.fromBytes(value));
+  }
+
+  get votes(): BigInt {
+    let value = this.get("votes");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set votes(value: BigInt) {
+    this.set("votes", Value.fromBigInt(value));
+  }
+}
+
 export class DelegationEvent extends Entity {
   constructor(id: string) {
     super();
@@ -27,12 +721,6 @@ export class DelegationEvent extends Entity {
       );
       store.set("DelegationEvent", id.toString(), this);
     }
-  }
-
-  static loadInBlock(id: string): DelegationEvent | null {
-    return changetype<DelegationEvent | null>(
-      store.get_in_block("DelegationEvent", id)
-    );
   }
 
   static load(id: string): DelegationEvent | null {
@@ -136,12 +824,6 @@ export class TransferEvent extends Entity {
     }
   }
 
-  static loadInBlock(id: string): TransferEvent | null {
-    return changetype<TransferEvent | null>(
-      store.get_in_block("TransferEvent", id)
-    );
-  }
-
   static load(id: string): TransferEvent | null {
     return changetype<TransferEvent | null>(store.get("TransferEvent", id));
   }
@@ -241,10 +923,6 @@ export class Seed extends Entity {
       );
       store.set("Seed", id.toString(), this);
     }
-  }
-
-  static loadInBlock(id: string): Seed | null {
-    return changetype<Seed | null>(store.get_in_block("Seed", id));
   }
 
   static load(id: string): Seed | null {
@@ -348,10 +1026,6 @@ export class Noun extends Entity {
     }
   }
 
-  static loadInBlock(id: string): Noun | null {
-    return changetype<Noun | null>(store.get_in_block("Noun", id));
-  }
-
   static load(id: string): Noun | null {
     return changetype<Noun | null>(store.get("Noun", id));
   }
@@ -399,8 +1073,13 @@ export class Noun extends Entity {
     this.set("owner", Value.fromString(value));
   }
 
-  get votes(): VoteLoader {
-    return new VoteLoader("Noun", this.get("id")!.toString(), "votes");
+  get votes(): Array<string> {
+    let value = this.get("votes");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toStringArray();
+    }
   }
 }
 
@@ -420,10 +1099,6 @@ export class Bid extends Entity {
       );
       store.set("Bid", id.toString(), this);
     }
-  }
-
-  static loadInBlock(id: string): Bid | null {
-    return changetype<Bid | null>(store.get_in_block("Bid", id));
   }
 
   static load(id: string): Bid | null {
@@ -557,10 +1232,6 @@ export class Auction extends Entity {
     }
   }
 
-  static loadInBlock(id: string): Auction | null {
-    return changetype<Auction | null>(store.get_in_block("Auction", id));
-  }
-
   static load(id: string): Auction | null {
     return changetype<Auction | null>(store.get("Auction", id));
   }
@@ -660,8 +1331,13 @@ export class Auction extends Entity {
     this.set("settled", Value.fromBoolean(value));
   }
 
-  get bids(): BidLoader {
-    return new BidLoader("Auction", this.get("id")!.toString(), "bids");
+  get bids(): Array<string> {
+    let value = this.get("bids");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toStringArray();
+    }
   }
 }
 
@@ -681,10 +1357,6 @@ export class Account extends Entity {
       );
       store.set("Account", id.toString(), this);
     }
-  }
-
-  static loadInBlock(id: string): Account | null {
-    return changetype<Account | null>(store.get_in_block("Account", id));
   }
 
   static load(id: string): Account | null {
@@ -805,10 +1477,6 @@ export class Delegate extends Entity {
     }
   }
 
-  static loadInBlock(id: string): Delegate | null {
-    return changetype<Delegate | null>(store.get_in_block("Delegate", id));
-  }
-
   static load(id: string): Delegate | null {
     return changetype<Delegate | null>(store.get("Delegate", id));
   }
@@ -865,12 +1533,13 @@ export class Delegate extends Entity {
     this.set("tokenHoldersRepresentedAmount", Value.fromI32(value));
   }
 
-  get tokenHoldersRepresented(): AccountLoader {
-    return new AccountLoader(
-      "Delegate",
-      this.get("id")!.toString(),
-      "tokenHoldersRepresented"
-    );
+  get tokenHoldersRepresented(): Array<string> {
+    let value = this.get("tokenHoldersRepresented");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toStringArray();
+    }
   }
 
   get nounsRepresented(): Array<string> {
@@ -886,16 +1555,22 @@ export class Delegate extends Entity {
     this.set("nounsRepresented", Value.fromStringArray(value));
   }
 
-  get votes(): VoteLoader {
-    return new VoteLoader("Delegate", this.get("id")!.toString(), "votes");
+  get votes(): Array<string> {
+    let value = this.get("votes");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  get proposals(): ProposalLoader {
-    return new ProposalLoader(
-      "Delegate",
-      this.get("id")!.toString(),
-      "proposals"
-    );
+  get proposals(): Array<string> {
+    let value = this.get("proposals");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toStringArray();
+    }
   }
 }
 
@@ -915,10 +1590,6 @@ export class Proposal extends Entity {
       );
       store.set("Proposal", id.toString(), this);
     }
-  }
-
-  static loadInBlock(id: string): Proposal | null {
-    return changetype<Proposal | null>(store.get_in_block("Proposal", id));
   }
 
   static load(id: string): Proposal | null {
@@ -1248,8 +1919,13 @@ export class Proposal extends Entity {
     }
   }
 
-  get votes(): VoteLoader {
-    return new VoteLoader("Proposal", this.get("id")!.toString(), "votes");
+  get votes(): Array<string> {
+    let value = this.get("votes");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toStringArray();
+    }
   }
 
   get totalSupply(): BigInt {
@@ -1330,12 +2006,13 @@ export class Proposal extends Entity {
     this.set("updatePeriodEndBlock", Value.fromBigInt(value));
   }
 
-  get feedbackPosts(): ProposalFeedbackLoader {
-    return new ProposalFeedbackLoader(
-      "Proposal",
-      this.get("id")!.toString(),
-      "feedbackPosts"
-    );
+  get feedbackPosts(): Array<string> {
+    let value = this.get("feedbackPosts");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toStringArray();
+    }
   }
 
   get onTimelockV1(): boolean {
@@ -1381,12 +2058,6 @@ export class ProposalVersion extends Entity {
       );
       store.set("ProposalVersion", id.toString(), this);
     }
-  }
-
-  static loadInBlock(id: string): ProposalVersion | null {
-    return changetype<ProposalVersion | null>(
-      store.get_in_block("ProposalVersion", id)
-    );
   }
 
   static load(id: string): ProposalVersion | null {
@@ -1558,10 +2229,6 @@ export class Vote extends Entity {
     }
   }
 
-  static loadInBlock(id: string): Vote | null {
-    return changetype<Vote | null>(store.get_in_block("Vote", id));
-  }
-
   static load(id: string): Vote | null {
     return changetype<Vote | null>(store.get("Vote", id));
   }
@@ -1723,10 +2390,6 @@ export class Governance extends Entity {
     }
   }
 
-  static loadInBlock(id: string): Governance | null {
-    return changetype<Governance | null>(store.get_in_block("Governance", id));
-  }
-
   static load(id: string): Governance | null {
     return changetype<Governance | null>(store.get("Governance", id));
   }
@@ -1880,12 +2543,6 @@ export class DynamicQuorumParams extends Entity {
     }
   }
 
-  static loadInBlock(id: string): DynamicQuorumParams | null {
-    return changetype<DynamicQuorumParams | null>(
-      store.get_in_block("DynamicQuorumParams", id)
-    );
-  }
-
   static load(id: string): DynamicQuorumParams | null {
     return changetype<DynamicQuorumParams | null>(
       store.get("DynamicQuorumParams", id)
@@ -1978,12 +2635,6 @@ export class ProposalCandidate extends Entity {
       );
       store.set("ProposalCandidate", id.toString(), this);
     }
-  }
-
-  static loadInBlock(id: string): ProposalCandidate | null {
-    return changetype<ProposalCandidate | null>(
-      store.get_in_block("ProposalCandidate", id)
-    );
   }
 
   static load(id: string): ProposalCandidate | null {
@@ -2156,12 +2807,13 @@ export class ProposalCandidate extends Entity {
     this.set("latestVersion", Value.fromString(value));
   }
 
-  get versions(): ProposalCandidateVersionLoader {
-    return new ProposalCandidateVersionLoader(
-      "ProposalCandidate",
-      this.get("id")!.toString(),
-      "versions"
-    );
+  get versions(): Array<string> {
+    let value = this.get("versions");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toStringArray();
+    }
   }
 }
 
@@ -2184,12 +2836,6 @@ export class ProposalCandidateVersion extends Entity {
       );
       store.set("ProposalCandidateVersion", id.toString(), this);
     }
-  }
-
-  static loadInBlock(id: string): ProposalCandidateVersion | null {
-    return changetype<ProposalCandidateVersion | null>(
-      store.get_in_block("ProposalCandidateVersion", id)
-    );
   }
 
   static load(id: string): ProposalCandidateVersion | null {
@@ -2296,12 +2942,6 @@ export class ProposalCandidateContent extends Entity {
       );
       store.set("ProposalCandidateContent", id.toString(), this);
     }
-  }
-
-  static loadInBlock(id: string): ProposalCandidateContent | null {
-    return changetype<ProposalCandidateContent | null>(
-      store.get_in_block("ProposalCandidateContent", id)
-    );
   }
 
   static load(id: string): ProposalCandidateContent | null {
@@ -2476,12 +3116,13 @@ export class ProposalCandidateContent extends Entity {
     }
   }
 
-  get contentSignatures(): ProposalCandidateSignatureLoader {
-    return new ProposalCandidateSignatureLoader(
-      "ProposalCandidateContent",
-      this.get("id")!.toString(),
-      "contentSignatures"
-    );
+  get contentSignatures(): Array<string> {
+    let value = this.get("contentSignatures");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toStringArray();
+    }
   }
 }
 
@@ -2504,12 +3145,6 @@ export class ProposalCandidateSignature extends Entity {
       );
       store.set("ProposalCandidateSignature", id.toString(), this);
     }
-  }
-
-  static loadInBlock(id: string): ProposalCandidateSignature | null {
-    return changetype<ProposalCandidateSignature | null>(
-      store.get_in_block("ProposalCandidateSignature", id)
-    );
   }
 
   static load(id: string): ProposalCandidateSignature | null {
@@ -2654,12 +3289,6 @@ export class ProposalFeedback extends Entity {
     }
   }
 
-  static loadInBlock(id: string): ProposalFeedback | null {
-    return changetype<ProposalFeedback | null>(
-      store.get_in_block("ProposalFeedback", id)
-    );
-  }
-
   static load(id: string): ProposalFeedback | null {
     return changetype<ProposalFeedback | null>(
       store.get("ProposalFeedback", id)
@@ -2791,12 +3420,6 @@ export class CandidateFeedback extends Entity {
       );
       store.set("CandidateFeedback", id.toString(), this);
     }
-  }
-
-  static loadInBlock(id: string): CandidateFeedback | null {
-    return changetype<CandidateFeedback | null>(
-      store.get_in_block("CandidateFeedback", id)
-    );
   }
 
   static load(id: string): CandidateFeedback | null {
@@ -2932,10 +3555,6 @@ export class Fork extends Entity {
     }
   }
 
-  static loadInBlock(id: string): Fork | null {
-    return changetype<Fork | null>(store.get_in_block("Fork", id));
-  }
-
   static load(id: string): Fork | null {
     return changetype<Fork | null>(store.get("Fork", id));
   }
@@ -2979,20 +3598,22 @@ export class Fork extends Entity {
     this.set("tokensInEscrowCount", Value.fromI32(value));
   }
 
-  get escrowDeposits(): EscrowDepositLoader {
-    return new EscrowDepositLoader(
-      "Fork",
-      this.get("id")!.toString(),
-      "escrowDeposits"
-    );
+  get escrowDeposits(): Array<string> {
+    let value = this.get("escrowDeposits");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  get escrowWithdrawals(): EscrowWithdrawalLoader {
-    return new EscrowWithdrawalLoader(
-      "Fork",
-      this.get("id")!.toString(),
-      "escrowWithdrawals"
-    );
+  get escrowWithdrawals(): Array<string> {
+    let value = this.get("escrowWithdrawals");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toStringArray();
+    }
   }
 
   get executed(): boolean {
@@ -3089,20 +3710,22 @@ export class Fork extends Entity {
     this.set("tokensForkingCount", Value.fromI32(value));
   }
 
-  get escrowedNouns(): EscrowedNounLoader {
-    return new EscrowedNounLoader(
-      "Fork",
-      this.get("id")!.toString(),
-      "escrowedNouns"
-    );
+  get escrowedNouns(): Array<string> {
+    let value = this.get("escrowedNouns");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  get joinedNouns(): ForkJoinedNounLoader {
-    return new ForkJoinedNounLoader(
-      "Fork",
-      this.get("id")!.toString(),
-      "joinedNouns"
-    );
+  get joinedNouns(): Array<string> {
+    let value = this.get("joinedNouns");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toStringArray();
+    }
   }
 }
 
@@ -3122,12 +3745,6 @@ export class EscrowDeposit extends Entity {
       );
       store.set("EscrowDeposit", id.toString(), this);
     }
-  }
-
-  static loadInBlock(id: string): EscrowDeposit | null {
-    return changetype<EscrowDeposit | null>(
-      store.get_in_block("EscrowDeposit", id)
-    );
   }
 
   static load(id: string): EscrowDeposit | null {
@@ -3248,12 +3865,6 @@ export class EscrowWithdrawal extends Entity {
     }
   }
 
-  static loadInBlock(id: string): EscrowWithdrawal | null {
-    return changetype<EscrowWithdrawal | null>(
-      store.get_in_block("EscrowWithdrawal", id)
-    );
-  }
-
   static load(id: string): EscrowWithdrawal | null {
     return changetype<EscrowWithdrawal | null>(
       store.get("EscrowWithdrawal", id)
@@ -3342,10 +3953,6 @@ export class ForkJoin extends Entity {
       );
       store.set("ForkJoin", id.toString(), this);
     }
-  }
-
-  static loadInBlock(id: string): ForkJoin | null {
-    return changetype<ForkJoin | null>(store.get_in_block("ForkJoin", id));
   }
 
   static load(id: string): ForkJoin | null {
@@ -3466,12 +4073,6 @@ export class EscrowedNoun extends Entity {
     }
   }
 
-  static loadInBlock(id: string): EscrowedNoun | null {
-    return changetype<EscrowedNoun | null>(
-      store.get_in_block("EscrowedNoun", id)
-    );
-  }
-
   static load(id: string): EscrowedNoun | null {
     return changetype<EscrowedNoun | null>(store.get("EscrowedNoun", id));
   }
@@ -3560,12 +4161,6 @@ export class ForkJoinedNoun extends Entity {
     }
   }
 
-  static loadInBlock(id: string): ForkJoinedNoun | null {
-    return changetype<ForkJoinedNoun | null>(
-      store.get_in_block("ForkJoinedNoun", id)
-    );
-  }
-
   static load(id: string): ForkJoinedNoun | null {
     return changetype<ForkJoinedNoun | null>(store.get("ForkJoinedNoun", id));
   }
@@ -3633,203 +4228,5 @@ export class ForkJoinedNoun extends Entity {
 
   set forkJoin(value: string) {
     this.set("forkJoin", Value.fromString(value));
-  }
-}
-
-export class VoteLoader extends Entity {
-  _entity: string;
-  _field: string;
-  _id: string;
-
-  constructor(entity: string, id: string, field: string) {
-    super();
-    this._entity = entity;
-    this._id = id;
-    this._field = field;
-  }
-
-  load(): Vote[] {
-    let value = store.loadRelated(this._entity, this._id, this._field);
-    return changetype<Vote[]>(value);
-  }
-}
-
-export class BidLoader extends Entity {
-  _entity: string;
-  _field: string;
-  _id: string;
-
-  constructor(entity: string, id: string, field: string) {
-    super();
-    this._entity = entity;
-    this._id = id;
-    this._field = field;
-  }
-
-  load(): Bid[] {
-    let value = store.loadRelated(this._entity, this._id, this._field);
-    return changetype<Bid[]>(value);
-  }
-}
-
-export class AccountLoader extends Entity {
-  _entity: string;
-  _field: string;
-  _id: string;
-
-  constructor(entity: string, id: string, field: string) {
-    super();
-    this._entity = entity;
-    this._id = id;
-    this._field = field;
-  }
-
-  load(): Account[] {
-    let value = store.loadRelated(this._entity, this._id, this._field);
-    return changetype<Account[]>(value);
-  }
-}
-
-export class ProposalLoader extends Entity {
-  _entity: string;
-  _field: string;
-  _id: string;
-
-  constructor(entity: string, id: string, field: string) {
-    super();
-    this._entity = entity;
-    this._id = id;
-    this._field = field;
-  }
-
-  load(): Proposal[] {
-    let value = store.loadRelated(this._entity, this._id, this._field);
-    return changetype<Proposal[]>(value);
-  }
-}
-
-export class ProposalFeedbackLoader extends Entity {
-  _entity: string;
-  _field: string;
-  _id: string;
-
-  constructor(entity: string, id: string, field: string) {
-    super();
-    this._entity = entity;
-    this._id = id;
-    this._field = field;
-  }
-
-  load(): ProposalFeedback[] {
-    let value = store.loadRelated(this._entity, this._id, this._field);
-    return changetype<ProposalFeedback[]>(value);
-  }
-}
-
-export class ProposalCandidateVersionLoader extends Entity {
-  _entity: string;
-  _field: string;
-  _id: string;
-
-  constructor(entity: string, id: string, field: string) {
-    super();
-    this._entity = entity;
-    this._id = id;
-    this._field = field;
-  }
-
-  load(): ProposalCandidateVersion[] {
-    let value = store.loadRelated(this._entity, this._id, this._field);
-    return changetype<ProposalCandidateVersion[]>(value);
-  }
-}
-
-export class ProposalCandidateSignatureLoader extends Entity {
-  _entity: string;
-  _field: string;
-  _id: string;
-
-  constructor(entity: string, id: string, field: string) {
-    super();
-    this._entity = entity;
-    this._id = id;
-    this._field = field;
-  }
-
-  load(): ProposalCandidateSignature[] {
-    let value = store.loadRelated(this._entity, this._id, this._field);
-    return changetype<ProposalCandidateSignature[]>(value);
-  }
-}
-
-export class EscrowDepositLoader extends Entity {
-  _entity: string;
-  _field: string;
-  _id: string;
-
-  constructor(entity: string, id: string, field: string) {
-    super();
-    this._entity = entity;
-    this._id = id;
-    this._field = field;
-  }
-
-  load(): EscrowDeposit[] {
-    let value = store.loadRelated(this._entity, this._id, this._field);
-    return changetype<EscrowDeposit[]>(value);
-  }
-}
-
-export class EscrowWithdrawalLoader extends Entity {
-  _entity: string;
-  _field: string;
-  _id: string;
-
-  constructor(entity: string, id: string, field: string) {
-    super();
-    this._entity = entity;
-    this._id = id;
-    this._field = field;
-  }
-
-  load(): EscrowWithdrawal[] {
-    let value = store.loadRelated(this._entity, this._id, this._field);
-    return changetype<EscrowWithdrawal[]>(value);
-  }
-}
-
-export class EscrowedNounLoader extends Entity {
-  _entity: string;
-  _field: string;
-  _id: string;
-
-  constructor(entity: string, id: string, field: string) {
-    super();
-    this._entity = entity;
-    this._id = id;
-    this._field = field;
-  }
-
-  load(): EscrowedNoun[] {
-    let value = store.loadRelated(this._entity, this._id, this._field);
-    return changetype<EscrowedNoun[]>(value);
-  }
-}
-
-export class ForkJoinedNounLoader extends Entity {
-  _entity: string;
-  _field: string;
-  _id: string;
-
-  constructor(entity: string, id: string, field: string) {
-    super();
-    this._entity = entity;
-    this._id = id;
-    this._field = field;
-  }
-
-  load(): ForkJoinedNoun[] {
-    let value = store.loadRelated(this._entity, this._id, this._field);
-    return changetype<ForkJoinedNoun[]>(value);
   }
 }

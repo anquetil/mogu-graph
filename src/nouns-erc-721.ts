@@ -1,11 +1,11 @@
-import { log } from '@graphprotocol/graph-ts';
+import { log, bigInt, BigInt } from '@graphprotocol/graph-ts';
 import {
   DelegateChanged,
   DelegateVotesChanged,
   NounCreated,
   Transfer,
 } from './types/NounsToken/NounsToken';
-import { Noun, Seed, DelegationEvent, TransferEvent } from './types/schema';
+import { Noun, Seed, DelegationEvent, TransferEvent, CustomTransferEvent, CustomDelegateEvent } from './types/schema';
 import { BIGINT_ONE, BIGINT_ZERO, ZERO_ADDRESS } from './utils/constants';
 import { getGovernanceEntity, getOrCreateDelegate, getOrCreateAccount } from './utils/helpers';
 
@@ -37,43 +37,61 @@ export function handleNounCreated(event: NounCreated): void {
 let accountNouns: string[] = [];
 
 export function handleDelegateChanged(event: DelegateChanged): void {
-  let tokenHolder = getOrCreateAccount(event.params.delegator.toHexString());
-  let previousDelegate = getOrCreateDelegate(event.params.fromDelegate.toHexString());
-  let newDelegate = getOrCreateDelegate(event.params.toDelegate.toHexString());
-  accountNouns = tokenHolder.nouns;
+   let tokenHolder = getOrCreateAccount(event.params.delegator.toHexString());
+   let previousDelegate = getOrCreateDelegate(event.params.fromDelegate.toHexString());
+   let newDelegate = getOrCreateDelegate(event.params.toDelegate.toHexString());
+   accountNouns = tokenHolder.nouns;
 
-  tokenHolder.delegate = newDelegate.id;
-  tokenHolder.save();
+   tokenHolder.delegate = newDelegate.id;
+   tokenHolder.save();
 
-  previousDelegate.tokenHoldersRepresentedAmount =
-    previousDelegate.tokenHoldersRepresentedAmount - 1;
-  let previousNounsRepresented = previousDelegate.nounsRepresented; // Re-assignment required to update array
-  previousDelegate.nounsRepresented = previousNounsRepresented.filter(
-    n => !accountNouns.includes(n),
-  );
-  newDelegate.tokenHoldersRepresentedAmount = newDelegate.tokenHoldersRepresentedAmount + 1;
-  let newNounsRepresented = newDelegate.nounsRepresented; // Re-assignment required to update array
-  for (let i = 0; i < accountNouns.length; i++) {
-    newNounsRepresented.push(accountNouns[i]);
-  }
-  newDelegate.nounsRepresented = newNounsRepresented;
-  previousDelegate.save();
-  newDelegate.save();
+   previousDelegate.tokenHoldersRepresentedAmount =
+      previousDelegate.tokenHoldersRepresentedAmount - 1;
+   let previousNounsRepresented = previousDelegate.nounsRepresented; // Re-assignment required to update array
+   previousDelegate.nounsRepresented = previousNounsRepresented.filter(
+      n => !accountNouns.includes(n),
+   );
+   newDelegate.tokenHoldersRepresentedAmount = newDelegate.tokenHoldersRepresentedAmount + 1;
+   let newNounsRepresented = newDelegate.nounsRepresented; // Re-assignment required to update array
+   for (let i = 0; i < accountNouns.length; i++) {
+      newNounsRepresented.push(accountNouns[i]);
+   }
+   newDelegate.nounsRepresented = newNounsRepresented;
+   previousDelegate.save();
+   newDelegate.save();
 
-  // Log a transfer event for each Noun
-  for (let i = 0; i < accountNouns.length; i++) {
-    let delegateChangedEvent = new DelegationEvent(
-      event.transaction.hash.toHexString() + '_' + accountNouns[i],
-    );
-    delegateChangedEvent.blockNumber = event.block.number;
-    delegateChangedEvent.blockTimestamp = event.block.timestamp;
-    delegateChangedEvent.noun = accountNouns[i];
-    delegateChangedEvent.previousDelegate = previousDelegate.id
-      ? previousDelegate.id
-      : tokenHolder.id;
-    delegateChangedEvent.newDelegate = newDelegate.id ? newDelegate.id : tokenHolder.id;
-    delegateChangedEvent.save();
-  }
+   /* DELEGATE CODE */
+   let customDelegate = new CustomDelegateEvent(event.transaction.hash
+      .toHexString()
+      .concat('-')
+      .concat(accountNouns.length.toString()));
+
+   customDelegate.hash = event.transaction.hash
+   customDelegate.block = event.block.number
+   customDelegate.timestamp = event.block.timestamp
+   customDelegate.from = event.params.delegator
+   customDelegate.oldDelegate = event.params.fromDelegate
+   customDelegate.newDelegate = event.params.toDelegate
+   customDelegate.votes = new BigInt(accountNouns.length)
+
+   customDelegate.save()
+   /* END MOGU CODE */
+
+
+   // Log a transfer event for each Noun
+   for (let i = 0; i < accountNouns.length; i++) {
+      let delegateChangedEvent = new DelegationEvent(
+         event.transaction.hash.toHexString() + '_' + accountNouns[i],
+      );
+      delegateChangedEvent.blockNumber = event.block.number;
+      delegateChangedEvent.blockTimestamp = event.block.timestamp;
+      delegateChangedEvent.noun = accountNouns[i];
+      delegateChangedEvent.previousDelegate = previousDelegate.id
+         ? previousDelegate.id
+         : tokenHolder.id;
+      delegateChangedEvent.newDelegate = newDelegate.id ? newDelegate.id : tokenHolder.id;
+      delegateChangedEvent.save();
+   }
 }
 
 export function handleDelegateVotesChanged(event: DelegateVotesChanged): void {
@@ -112,6 +130,23 @@ export function handleTransfer(event: Transfer): void {
   transferEvent.previousHolder = fromHolder.id.toString();
   transferEvent.newHolder = toHolder.id.toString();
   transferEvent.save();
+
+   /* TRANSFER CODE */
+   let customTransfer = new CustomTransferEvent(event.transaction.hash
+      .toHexString()
+      .concat('-t-')
+      .concat(event.params.tokenId.toString()));
+
+   customTransfer.hash = event.transaction.hash
+   customTransfer.block = event.block.number
+   customTransfer.timestamp = event.block.timestamp
+   customTransfer.from = event.params.from
+   customTransfer.to = event.params.to
+   customTransfer.noun = event.params.tokenId
+
+   customTransfer.save()
+   /* END MOGU CODE */
+
 
   // fromHolder
   if (event.params.from.toHexString() == ZERO_ADDRESS) {
