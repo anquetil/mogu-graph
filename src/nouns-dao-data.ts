@@ -8,7 +8,7 @@ import {
   ProposalCandidateUpdated,
   SignatureAdded,
 } from './types/NounsDAOData/NounsDAOData';
-import { ProposalCandidateContent, ProposalCandidateVersion } from './types/schema';
+import { CustomCandidateEvent, CustomFeedbackEvent, ProposalCandidateContent, ProposalCandidateVersion } from './types/schema';
 import {
   candidateID,
   getOrCreateCandidateFeedback,
@@ -33,6 +33,27 @@ export function handleProposalCandidateCreated(event: ProposalCandidateCreated):
   candidate.lastUpdatedTimestamp = event.block.timestamp;
   candidate.lastUpdatedBlock = event.block.number;
   candidate.canceled = false;
+
+   // MOGU CODE
+   let customCandidate = new CustomCandidateEvent(event.transaction.hash.toHexString()
+      .concat('-')
+      .concat(event.params.slug.toString()));
+
+   customCandidate.hash = event.transaction.hash;
+   customCandidate.block = event.block.number;
+   customCandidate.timestamp = event.block.timestamp;
+   customCandidate.from = event.params.msgSender;
+   customCandidate.slug = event.params.slug;
+   customCandidate.targets = changetype<Bytes[]>(event.params.targets);
+   customCandidate.values = event.params.values;
+   customCandidate.signatures = event.params.signatures;
+   customCandidate.calldatas = event.params.calldatas;
+   customCandidate.title = extractTitle(event.params.description);
+   customCandidate.description = event.params.description;
+   customCandidate.updateMessage = ""
+
+   customCandidate.save()
+   /* END MOGU CODE */
 
   const version = captureProposalCandidateVersion(
     event.transaction.hash.toHexString(),
@@ -60,6 +81,27 @@ export function handleProposalCandidateUpdated(event: ProposalCandidateUpdated):
 
   candidate.lastUpdatedTimestamp = event.block.timestamp;
   candidate.lastUpdatedBlock = event.block.number;
+
+   // MOGU CODE
+   let customCandidate = new CustomCandidateEvent(event.transaction.hash.toHexString()
+      .concat('-')
+      .concat(event.params.slug.toString()));
+
+   customCandidate.hash = event.transaction.hash;
+   customCandidate.block = event.block.number;
+   customCandidate.timestamp = event.block.timestamp;
+   customCandidate.from = event.params.msgSender;
+   customCandidate.slug = event.params.slug;
+   customCandidate.targets = changetype<Bytes[]>(event.params.targets);
+   customCandidate.values = event.params.values;
+   customCandidate.signatures = event.params.signatures;
+   customCandidate.calldatas = event.params.calldatas;
+   customCandidate.title = extractTitle(event.params.description);
+   customCandidate.description = event.params.description;
+   customCandidate.updateMessage = event.params.reason;
+
+   customCandidate.save()
+   /* END MOGU CODE */
 
   const version = captureProposalCandidateVersion(
     event.transaction.hash.toHexString(),
@@ -139,6 +181,25 @@ export function handleFeedbackSent(event: FeedbackSent): void {
   feedback.reason = event.params.reason;
 
   feedback.save();
+
+   /* MOGU CODE */
+   let customFeedback = new CustomFeedbackEvent(event.transaction.hash.toHexString()
+      .concat('-')
+      .concat(event.params.proposalId.toString()));
+
+   customFeedback.hash = event.transaction.hash;
+   customFeedback.block = event.block.number;
+   customFeedback.timestamp = event.block.timestamp;
+   customFeedback.from = event.params.msgSender;
+   customFeedback.candidate = false;
+   customFeedback.propID = event.params.proposalId.toString();
+   customFeedback.votes = delegate.delegatedVotes;
+   customFeedback.supportDetailed = event.params.support;
+   customFeedback.reason = event.params.reason;
+
+   customFeedback.save()
+
+   /* END MOGU */
 }
 
 export function handleCandidateFeedbackSent(event: CandidateFeedbackSent): void {
@@ -156,6 +217,26 @@ export function handleCandidateFeedbackSent(event: CandidateFeedbackSent): void 
   feedback.reason = event.params.reason;
 
   feedback.save();
+
+  /* MOGU CODE */
+   let customFeedback = new CustomFeedbackEvent(event.transaction.hash.toHexString()
+      .concat('-')
+      .concat(event.params.slug.toString()));
+
+   customFeedback.hash = event.transaction.hash;
+   customFeedback.block = event.block.number;
+   customFeedback.timestamp = event.block.timestamp;
+   customFeedback.from = event.params.msgSender;
+   customFeedback.candidate = true;
+   customFeedback.propID = event.params.slug;
+   customFeedback.votes = delegate.delegatedVotes;
+   customFeedback.supportDetailed = event.params.support;
+   customFeedback.reason = event.params.reason;
+
+   customFeedback.save()
+
+   /* END MOGU */
+
 }
 
 function captureProposalCandidateVersion(

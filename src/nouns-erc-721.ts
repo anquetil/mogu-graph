@@ -72,7 +72,7 @@ export function handleDelegateChanged(event: DelegateChanged): void {
    customDelegate.from = event.params.delegator
    customDelegate.oldDelegate = event.params.fromDelegate
    customDelegate.newDelegate = event.params.toDelegate
-   customDelegate.votes = new BigInt(accountNouns.length)
+   customDelegate.votes = BigInt.fromString(accountNouns.length.toString())
 
    customDelegate.save()
    /* END MOGU CODE */

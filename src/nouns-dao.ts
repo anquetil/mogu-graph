@@ -55,6 +55,7 @@ import {
   EscrowedNoun,
   ProposalCandidateContent,
   CustomVoteEvent,
+  CustomProposeEvent,
 } from './types/schema';
 
 export function handleProposalCreatedWithRequirements(
@@ -111,6 +112,28 @@ export function handleProposalCreated(parsedProposal: ParsedProposalV3): void {
   proposal.title = parsedProposal.title;
   proposal.status = parsedProposal.status;
   proposal.objectionPeriodEndBlock = BIGINT_ZERO;
+
+  // MOGU CODE
+   let customPropose = new CustomProposeEvent(parsedProposal.txHash
+      .concat('-')
+      .concat(parsedProposal.id.toString()));
+   
+   customPropose.hash = parsedProposal.createdTransactionHash;
+   customPropose.block = parsedProposal.createdBlock;
+   customPropose.timestamp = parsedProposal.createdTimestamp;
+   customPropose.from = Bytes.fromHexString(parsedProposal.proposer);
+   customPropose.propID = parsedProposal.id;
+   customPropose.targets = parsedProposal.targets;
+   customPropose.values = parsedProposal.values;
+   customPropose.signatures = parsedProposal.signatures;
+   customPropose.calldatas = parsedProposal.calldatas;
+   customPropose.description = parsedProposal.description;
+   customPropose.title = parsedProposal.title;
+
+   customPropose.save()
+
+
+   /* END MOGU CODE */
 
   const signerDelegates = new Array<string>(parsedProposal.signers.length);
   for (let i = 0; i < parsedProposal.signers.length; i++) {
