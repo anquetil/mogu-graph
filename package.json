@@ -11,14 +11,14 @@
   },
   "scripts": {
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.studio.thegraph.com/deploy/ propdates",
+    "deploy": "goldsky subgraph deploy mogu-graph/$V --path .",
     "create-local": "graph create --node http://localhost:8020/ propdates",
     "remove-local": "graph remove --node http://localhost:8020/ propdates",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 propdates",
     "test": "graph test",
     "codegen": "graph codegen --output-dir src/types/",
     "create:localnode": "graph create --node http://localhost:8020/"
-  },
+   },
   "devDependencies": {
     "@graphprotocol/graph-cli": "0.47.1",
     "@graphprotocol/graph-ts": "0.31.0",

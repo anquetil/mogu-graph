@@ -265,13 +265,13 @@ type CustomFeedbackEvent implements CustomEvent @entity {
    propID: String!
 
    "how many votes the feedback giver has"
-   votes: BigInt
+   votes: BigInt!
 
    "The integer support value: against (0), for (1), or abstain (2)"
    supportDetailed: Int!
 
    "Feedback details"
-   reason: String!
+   reason: String
 }
 
 "END MOGU CUSTOM TYPES"
