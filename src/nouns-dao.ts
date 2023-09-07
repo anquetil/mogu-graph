@@ -56,6 +56,7 @@ import {
   ProposalCandidateContent,
   CustomVoteEvent,
   CustomProposeEvent,
+  CustomForkEvent,
 } from './types/schema';
 
 export function handleProposalCreatedWithRequirements(
@@ -445,6 +446,20 @@ export function handleEscrowedToFork(event: EscrowedToFork): void {
   deposit.reason = event.params.reason;
   deposit.save();
 
+   /* MOGU CODE */
+   let customFork = new CustomForkEvent(event.transaction.hash
+      .toHexString()
+      .concat('-')
+      .concat(event.params.forkId.toString()));
+   customFork.hash = event.transaction.hash;
+   customFork.block = event.block.number;
+   customFork.timestamp = event.block.timestamp;
+   customFork.from = event.params.owner;
+   customFork.forkID = event.params.forkId;
+   customFork.deposit = true;
+   customFork.nouns = new BigInt(event.params.tokenIds.length);
+   /* END MOGU */
+
   fork.tokensInEscrowCount += event.params.tokenIds.length;
   // Add escrowed Nouns to the list of Nouns connected to their escrow event
   // Using an entity rather than just Noun IDs thinking it's helpful in creating the UI timeline view
@@ -470,6 +485,21 @@ export function handleWithdrawFromForkEscrow(event: WithdrawFromForkEscrow): voi
   withdrawal.owner = getOrCreateDelegate(event.params.owner.toHexString()).id;
   withdrawal.tokenIDs = event.params.tokenIds;
   withdrawal.save();
+
+  /* MOGU CODE */
+   let customFork = new CustomForkEvent(event.transaction.hash
+      .toHexString()
+      .concat('-')
+      .concat(event.params.forkId.toString()));
+   customFork.hash = event.transaction.hash;
+   customFork.block = event.block.number;
+   customFork.timestamp = event.block.timestamp;
+   customFork.from = event.params.owner;
+   customFork.forkID = event.params.forkId;
+   customFork.deposit = false;
+   customFork.nouns = new BigInt(event.params.tokenIds.length);
+   /* END MOGU */
+   
 
   fork.tokensInEscrowCount -= event.params.tokenIds.length;
 

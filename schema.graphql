@@ -274,6 +274,36 @@ type CustomFeedbackEvent implements CustomEvent @entity {
    reason: String
 }
 
+type CustomForkEvent implements CustomEvent @entity {
+   "Unique id (hash + prop id/slug)"
+   id: ID!
+
+   "Hash"
+   hash: Bytes!
+
+   "Block Number"
+   block: BigInt!
+
+   "Timestamp of Block"
+   timestamp: BigInt!
+
+   "proposer"
+   from: Bytes!
+
+   "Optional: to - empty here"
+   to: Bytes
+
+   "id fork joining or withdrawing"
+   forkID: BigInt!
+
+   "true if deposit, false if withdrawal"
+   deposit: Boolean!
+
+   "number if nouns contributed"
+   nouns: BigInt!
+}
+
+
 "END MOGU CUSTOM TYPES"
 
 type DelegationEvent @entity {

@@ -1278,21 +1278,17 @@ export class CustomFeedbackEvent extends Entity {
     this.set("propID", Value.fromString(value));
   }
 
-  get votes(): BigInt | null {
+  get votes(): BigInt {
     let value = this.get("votes");
     if (!value || value.kind == ValueKind.NULL) {
-      return null;
+      throw new Error("Cannot return null for a required field.");
     } else {
       return value.toBigInt();
     }
   }
 
-  set votes(value: BigInt | null) {
-    if (!value) {
-      this.unset("votes");
-    } else {
-      this.set("votes", Value.fromBigInt(<BigInt>value));
-    }
+  set votes(value: BigInt) {
+    this.set("votes", Value.fromBigInt(value));
   }
 
   get supportDetailed(): i32 {
@@ -1308,8 +1304,48 @@ export class CustomFeedbackEvent extends Entity {
     this.set("supportDetailed", Value.fromI32(value));
   }
 
-  get reason(): string {
+  get reason(): string | null {
     let value = this.get("reason");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set reason(value: string | null) {
+    if (!value) {
+      this.unset("reason");
+    } else {
+      this.set("reason", Value.fromString(<string>value));
+    }
+  }
+}
+
+export class CustomForkEvent extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save CustomForkEvent entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type CustomForkEvent must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("CustomForkEvent", id.toString(), this);
+    }
+  }
+
+  static load(id: string): CustomForkEvent | null {
+    return changetype<CustomForkEvent | null>(store.get("CustomForkEvent", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -1317,8 +1353,116 @@ export class CustomFeedbackEvent extends Entity {
     }
   }
 
-  set reason(value: string) {
-    this.set("reason", Value.fromString(value));
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get hash(): Bytes {
+    let value = this.get("hash");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set hash(value: Bytes) {
+    this.set("hash", Value.fromBytes(value));
+  }
+
+  get block(): BigInt {
+    let value = this.get("block");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set block(value: BigInt) {
+    this.set("block", Value.fromBigInt(value));
+  }
+
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
+  }
+
+  get from(): Bytes {
+    let value = this.get("from");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set from(value: Bytes) {
+    this.set("from", Value.fromBytes(value));
+  }
+
+  get to(): Bytes | null {
+    let value = this.get("to");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set to(value: Bytes | null) {
+    if (!value) {
+      this.unset("to");
+    } else {
+      this.set("to", Value.fromBytes(<Bytes>value));
+    }
+  }
+
+  get forkID(): BigInt {
+    let value = this.get("forkID");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set forkID(value: BigInt) {
+    this.set("forkID", Value.fromBigInt(value));
+  }
+
+  get deposit(): boolean {
+    let value = this.get("deposit");
+    if (!value || value.kind == ValueKind.NULL) {
+      return false;
+    } else {
+      return value.toBoolean();
+    }
+  }
+
+  set deposit(value: boolean) {
+    this.set("deposit", Value.fromBoolean(value));
+  }
+
+  get nouns(): BigInt {
+    let value = this.get("nouns");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set nouns(value: BigInt) {
+    this.set("nouns", Value.fromBigInt(value));
   }
 }
 
