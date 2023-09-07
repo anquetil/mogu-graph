@@ -45,6 +45,7 @@ export function handleDelegateChanged(event: DelegateChanged): void {
    tokenHolder.delegate = newDelegate.id;
    tokenHolder.save();
 
+   // IF NOUNS HELD BY TOKEN HOLDER = 0 AND PREVIOUSDELEGATE IS SELF, THIS CAUSES ISSUES
    previousDelegate.tokenHoldersRepresentedAmount =
       previousDelegate.tokenHoldersRepresentedAmount - 1;
    let previousNounsRepresented = previousDelegate.nounsRepresented; // Re-assignment required to update array
@@ -178,8 +179,8 @@ export function handleTransfer(event: Transfer): void {
     if (fromHolder.tokenBalanceRaw == BIGINT_ZERO && fromHolderPreviousBalance > BIGINT_ZERO) {
       governance.currentTokenHolders = governance.currentTokenHolders.minus(BIGINT_ONE);
       governance.save();
-
-      fromHolder.delegate = null;
+      
+      // fromHolder.delegate = null;
     } else if (
       fromHolder.tokenBalanceRaw > BIGINT_ZERO &&
       fromHolderPreviousBalance == BIGINT_ZERO
@@ -211,11 +212,11 @@ export function handleTransfer(event: Transfer): void {
     : toHolder.id.toString();
   delegateChangedEvent.save();
 
-  let toHolderDelegate = getOrCreateDelegate(toHolder.delegate ? toHolder.delegate! : toHolder.id);
-  let toHolderNounsRepresented = toHolderDelegate.nounsRepresented; // Re-assignment required to update array
-  toHolderNounsRepresented.push(transferredNounId);
-  toHolderDelegate.nounsRepresented = toHolderNounsRepresented;
-  toHolderDelegate.save();
+ let toHolderDelegate = getOrCreateDelegate(toHolder.delegate ? toHolder.delegate! : toHolder.id);
+ let toHolderNounsRepresented = toHolderDelegate.nounsRepresented; // Re-assignment required to update array
+ toHolderNounsRepresented.push(transferredNounId);
+ toHolderDelegate.nounsRepresented = toHolderNounsRepresented;
+ toHolderDelegate.save();
 
   let toHolderPreviousBalance = toHolder.tokenBalanceRaw;
   toHolder.tokenBalanceRaw = toHolder.tokenBalanceRaw.plus(BIGINT_ONE);
@@ -226,15 +227,15 @@ export function handleTransfer(event: Transfer): void {
   toHolderNouns.push(event.params.tokenId.toString());
   toHolder.nouns = toHolderNouns;
 
-  if (toHolder.tokenBalanceRaw == BIGINT_ZERO && toHolderPreviousBalance > BIGINT_ZERO) {
-    governance.currentTokenHolders = governance.currentTokenHolders.minus(BIGINT_ONE);
-    governance.save();
-  } else if (toHolder.tokenBalanceRaw > BIGINT_ZERO && toHolderPreviousBalance == BIGINT_ZERO) {
-    governance.currentTokenHolders = governance.currentTokenHolders.plus(BIGINT_ONE);
-    governance.save();
+   if (toHolder.tokenBalanceRaw == BIGINT_ZERO && toHolderPreviousBalance > BIGINT_ZERO) {
+      governance.currentTokenHolders = governance.currentTokenHolders.minus(BIGINT_ONE);
+      governance.save();
+   } else if (toHolder.tokenBalanceRaw > BIGINT_ZERO && toHolderPreviousBalance == BIGINT_ZERO) {
+      governance.currentTokenHolders = governance.currentTokenHolders.plus(BIGINT_ONE);
+      governance.save();
 
-    toHolder.delegate = toHolder.id;
-  }
+      toHolder.delegate = toHolder.id;
+   }
 
   let noun = Noun.load(transferredNounId);
   if (noun == null) {
