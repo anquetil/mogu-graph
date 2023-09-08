@@ -300,7 +300,7 @@ type CustomForkEvent implements CustomEvent @entity {
    deposit: Boolean!
 
    "number if nouns contributed"
-   nouns: BigInt!
+   nouns: Int!
 }
 
 

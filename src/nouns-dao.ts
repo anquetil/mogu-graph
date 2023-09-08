@@ -457,7 +457,7 @@ export function handleEscrowedToFork(event: EscrowedToFork): void {
    customFork.from = event.params.owner;
    customFork.forkID = event.params.forkId;
    customFork.deposit = true;
-   customFork.nouns = new BigInt(event.params.tokenIds.length);
+   customFork.nouns = event.params.tokenIds.length;
    customFork.save()
    /* END MOGU */
 
@@ -498,7 +498,7 @@ export function handleWithdrawFromForkEscrow(event: WithdrawFromForkEscrow): voi
    customFork.from = event.params.owner;
    customFork.forkID = event.params.forkId;
    customFork.deposit = false;
-   customFork.nouns = new BigInt(event.params.tokenIds.length);
+   customFork.nouns = event.params.tokenIds.length;
    customFork.save()
    /* END MOGU */
    

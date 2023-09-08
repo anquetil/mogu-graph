@@ -1452,17 +1452,17 @@ export class CustomForkEvent extends Entity {
     this.set("deposit", Value.fromBoolean(value));
   }
 
-  get nouns(): BigInt {
+  get nouns(): i32 {
     let value = this.get("nouns");
     if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
+      return 0;
     } else {
-      return value.toBigInt();
+      return value.toI32();
     }
   }
 
-  set nouns(value: BigInt) {
-    this.set("nouns", Value.fromBigInt(value));
+  set nouns(value: i32) {
+    this.set("nouns", Value.fromI32(value));
   }
 }
 
