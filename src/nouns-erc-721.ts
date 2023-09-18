@@ -67,13 +67,14 @@ export function handleDelegateChanged(event: DelegateChanged): void {
       .concat('-')
       .concat(accountNouns.length.toString()));
 
-   customDelegate.hash = event.transaction.hash
-   customDelegate.block = event.block.number
-   customDelegate.timestamp = event.block.timestamp
-   customDelegate.from = event.params.delegator
-   customDelegate.oldDelegate = event.params.fromDelegate
-   customDelegate.newDelegate = event.params.toDelegate
-   customDelegate.votes = BigInt.fromString(accountNouns.length.toString())
+   customDelegate.hash = event.transaction.hash;
+   customDelegate.block = event.block.number;
+   customDelegate.timestamp = event.block.timestamp;
+   customDelegate.from = event.params.delegator;
+   customDelegate.involved = [event.params.delegator, event.params.fromDelegate, event.params.toDelegate];
+   customDelegate.oldDelegate = event.params.fromDelegate;
+   customDelegate.newDelegate = event.params.toDelegate;
+   customDelegate.votes = BigInt.fromString(accountNouns.length.toString());
 
    customDelegate.save()
    /* END MOGU CODE */
@@ -142,7 +143,7 @@ export function handleTransfer(event: Transfer): void {
    customTransfer.block = event.block.number
    customTransfer.timestamp = event.block.timestamp
    customTransfer.from = event.params.from
-   customTransfer.to = event.params.to
+   customTransfer.involved = [event.params.from, event.params.to];
    customTransfer.noun = event.params.tokenId
 
    customTransfer.save()

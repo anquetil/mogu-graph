@@ -58,6 +58,7 @@ export function handleAuctionBid(event: AuctionBid): void {
    customBid.block = event.block.number
    customBid.timestamp = event.block.timestamp
    customBid.from = event.params.sender
+   customBid.involved = [event.params.sender]
    customBid.amount = event.params.value
    customBid.noun = event.params.nounId
 
@@ -114,6 +115,7 @@ export function handleAuctionSettled(event: AuctionSettled): void {
    customWon.block = event.block.number
    customWon.timestamp = event.block.timestamp
    customWon.from = event.params.winner
+   customWon.involved = [event.params.winner];
    customWon.amount = event.params.amount
    customWon.noun = event.params.nounId
 

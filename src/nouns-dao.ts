@@ -123,6 +123,7 @@ export function handleProposalCreated(parsedProposal: ParsedProposalV3): void {
    customPropose.block = parsedProposal.createdBlock;
    customPropose.timestamp = parsedProposal.createdTimestamp;
    customPropose.from = Bytes.fromHexString(parsedProposal.proposer);
+   customPropose.involved = [Bytes.fromHexString(parsedProposal.proposer)];
    customPropose.propID = parsedProposal.id;
    customPropose.targets = parsedProposal.targets;
    customPropose.values = parsedProposal.values;
@@ -293,6 +294,7 @@ export function handleVoteCast(event: VoteCast): void {
    customVote.block = event.block.number
    customVote.timestamp = event.block.timestamp
    customVote.from = event.params.voter
+   customVote.involved = [event.params.voter];
    customVote.prop = event.params.proposalId
    if (event.params.reason != '') {
       customVote.reason = event.params.reason;
@@ -455,6 +457,7 @@ export function handleEscrowedToFork(event: EscrowedToFork): void {
    customFork.block = event.block.number;
    customFork.timestamp = event.block.timestamp;
    customFork.from = event.params.owner;
+   customFork.involved = [event.params.owner];
    customFork.forkID = event.params.forkId;
    customFork.deposit = true;
    customFork.nouns = event.params.tokenIds.length;
@@ -496,6 +499,7 @@ export function handleWithdrawFromForkEscrow(event: WithdrawFromForkEscrow): voi
    customFork.block = event.block.number;
    customFork.timestamp = event.block.timestamp;
    customFork.from = event.params.owner;
+   customFork.involved = [event.params.owner];
    customFork.forkID = event.params.forkId;
    customFork.deposit = false;
    customFork.nouns = event.params.tokenIds.length;

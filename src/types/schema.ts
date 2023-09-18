@@ -98,20 +98,20 @@ export class CustomVoteEvent extends Entity {
     this.set("from", Value.fromBytes(value));
   }
 
-  get to(): Bytes | null {
-    let value = this.get("to");
+  get involved(): Array<Bytes> | null {
+    let value = this.get("involved");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
-      return value.toBytes();
+      return value.toBytesArray();
     }
   }
 
-  set to(value: Bytes | null) {
+  set involved(value: Array<Bytes> | null) {
     if (!value) {
-      this.unset("to");
+      this.unset("involved");
     } else {
-      this.set("to", Value.fromBytes(<Bytes>value));
+      this.set("involved", Value.fromBytesArray(<Array<Bytes>>value));
     }
   }
 
@@ -259,20 +259,20 @@ export class CustomBidEvent extends Entity {
     this.set("from", Value.fromBytes(value));
   }
 
-  get to(): Bytes | null {
-    let value = this.get("to");
+  get involved(): Array<Bytes> | null {
+    let value = this.get("involved");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
-      return value.toBytes();
+      return value.toBytesArray();
     }
   }
 
-  set to(value: Bytes | null) {
+  set involved(value: Array<Bytes> | null) {
     if (!value) {
-      this.unset("to");
+      this.unset("involved");
     } else {
-      this.set("to", Value.fromBytes(<Bytes>value));
+      this.set("involved", Value.fromBytesArray(<Array<Bytes>>value));
     }
   }
 
@@ -395,20 +395,20 @@ export class CustomWonAuctionEvent extends Entity {
     this.set("from", Value.fromBytes(value));
   }
 
-  get to(): Bytes | null {
-    let value = this.get("to");
+  get involved(): Array<Bytes> | null {
+    let value = this.get("involved");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
-      return value.toBytes();
+      return value.toBytesArray();
     }
   }
 
-  set to(value: Bytes | null) {
+  set involved(value: Array<Bytes> | null) {
     if (!value) {
-      this.unset("to");
+      this.unset("involved");
     } else {
-      this.set("to", Value.fromBytes(<Bytes>value));
+      this.set("involved", Value.fromBytesArray(<Array<Bytes>>value));
     }
   }
 
@@ -528,20 +528,20 @@ export class CustomTransferEvent extends Entity {
     this.set("from", Value.fromBytes(value));
   }
 
-  get to(): Bytes | null {
-    let value = this.get("to");
+  get involved(): Array<Bytes> | null {
+    let value = this.get("involved");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
-      return value.toBytes();
+      return value.toBytesArray();
     }
   }
 
-  set to(value: Bytes | null) {
+  set involved(value: Array<Bytes> | null) {
     if (!value) {
-      this.unset("to");
+      this.unset("involved");
     } else {
-      this.set("to", Value.fromBytes(<Bytes>value));
+      this.set("involved", Value.fromBytesArray(<Array<Bytes>>value));
     }
   }
 
@@ -648,20 +648,20 @@ export class CustomDelegateEvent extends Entity {
     this.set("from", Value.fromBytes(value));
   }
 
-  get to(): Bytes | null {
-    let value = this.get("to");
+  get involved(): Array<Bytes> | null {
+    let value = this.get("involved");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
-      return value.toBytes();
+      return value.toBytesArray();
     }
   }
 
-  set to(value: Bytes | null) {
+  set involved(value: Array<Bytes> | null) {
     if (!value) {
-      this.unset("to");
+      this.unset("involved");
     } else {
-      this.set("to", Value.fromBytes(<Bytes>value));
+      this.set("involved", Value.fromBytesArray(<Array<Bytes>>value));
     }
   }
 
@@ -794,20 +794,20 @@ export class CustomProposeEvent extends Entity {
     this.set("from", Value.fromBytes(value));
   }
 
-  get to(): Bytes | null {
-    let value = this.get("to");
+  get involved(): Array<Bytes> | null {
+    let value = this.get("involved");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
-      return value.toBytes();
+      return value.toBytesArray();
     }
   }
 
-  set to(value: Bytes | null) {
+  set involved(value: Array<Bytes> | null) {
     if (!value) {
-      this.unset("to");
+      this.unset("involved");
     } else {
-      this.set("to", Value.fromBytes(<Bytes>value));
+      this.set("involved", Value.fromBytesArray(<Array<Bytes>>value));
     }
   }
 
@@ -1008,20 +1008,20 @@ export class CustomCandidateEvent extends Entity {
     this.set("from", Value.fromBytes(value));
   }
 
-  get to(): Bytes | null {
-    let value = this.get("to");
+  get involved(): Array<Bytes> | null {
+    let value = this.get("involved");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
-      return value.toBytes();
+      return value.toBytesArray();
     }
   }
 
-  set to(value: Bytes | null) {
+  set involved(value: Array<Bytes> | null) {
     if (!value) {
-      this.unset("to");
+      this.unset("involved");
     } else {
-      this.set("to", Value.fromBytes(<Bytes>value));
+      this.set("involved", Value.fromBytesArray(<Array<Bytes>>value));
     }
   }
 
@@ -1235,20 +1235,20 @@ export class CustomFeedbackEvent extends Entity {
     this.set("from", Value.fromBytes(value));
   }
 
-  get to(): Bytes | null {
-    let value = this.get("to");
+  get involved(): Array<Bytes> | null {
+    let value = this.get("involved");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
-      return value.toBytes();
+      return value.toBytesArray();
     }
   }
 
-  set to(value: Bytes | null) {
+  set involved(value: Array<Bytes> | null) {
     if (!value) {
-      this.unset("to");
+      this.unset("involved");
     } else {
-      this.set("to", Value.fromBytes(<Bytes>value));
+      this.set("involved", Value.fromBytesArray(<Array<Bytes>>value));
     }
   }
 
@@ -1409,20 +1409,20 @@ export class CustomForkEvent extends Entity {
     this.set("from", Value.fromBytes(value));
   }
 
-  get to(): Bytes | null {
-    let value = this.get("to");
+  get involved(): Array<Bytes> | null {
+    let value = this.get("involved");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
-      return value.toBytes();
+      return value.toBytesArray();
     }
   }
 
-  set to(value: Bytes | null) {
+  set involved(value: Array<Bytes> | null) {
     if (!value) {
-      this.unset("to");
+      this.unset("involved");
     } else {
-      this.set("to", Value.fromBytes(<Bytes>value));
+      this.set("involved", Value.fromBytesArray(<Array<Bytes>>value));
     }
   }
 

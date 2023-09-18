@@ -14,8 +14,8 @@ interface CustomEvent @entity {
    "Originator of action"
    from: Bytes!
 
-   "Optional: to"
-   to: Bytes
+   "anyone, including 'from' who is involved/queriable"
+   involved: [Bytes!]
 }
 
 type CustomVoteEvent implements CustomEvent @entity {
@@ -34,8 +34,8 @@ type CustomVoteEvent implements CustomEvent @entity {
    "Originator of action"
    from: Bytes!
 
-   "Optional: to"
-   to: Bytes
+   "anyone, including 'from' who is involved/queriable"
+   involved: [Bytes!]
 
    "proposal ID"
    prop: BigInt!
@@ -66,8 +66,8 @@ type CustomBidEvent implements CustomEvent @entity {
    "Originator of action"
    from: Bytes!
 
-   "Optional: to"
-   to: Bytes
+   "anyone, including 'from' who is involved/queriable"
+   involved: [Bytes!]
 
    "amount bidding"
    amount: BigInt!
@@ -92,8 +92,8 @@ type CustomWonAuctionEvent implements CustomEvent @entity {
    "Originator of action"
    from: Bytes!
 
-   "Optional: to"
-   to: Bytes
+   "anyone, including 'from' who is involved/queriable"
+   involved: [Bytes!]
 
    "amount paid for"
    amount: BigInt!
@@ -118,8 +118,8 @@ type CustomTransferEvent implements CustomEvent @entity {
    "Originator of action"
    from: Bytes!
 
-   "Required: to"
-   to: Bytes
+   "anyone, including 'from' who is involved/queriable"
+   involved: [Bytes!]
 
    "noun id"
    noun: BigInt!
@@ -141,8 +141,8 @@ type CustomDelegateEvent implements CustomEvent @entity {
    "Originator of action"
    from: Bytes!
 
-   "optional"
-   to: Bytes
+   "anyone, including 'from' who is involved/queriable"
+   involved: [Bytes!]
 
    "old delegate"
    oldDelegate: Bytes!
@@ -171,7 +171,7 @@ type CustomProposeEvent implements CustomEvent @entity {
    from: Bytes!
 
    "Optional: to - empty here"
-   to: Bytes
+   involved: [Bytes!]
 
    "Proposal ID, in this implementation it seems to be a autoincremental id"
    propID: String!
@@ -211,8 +211,8 @@ type CustomCandidateEvent implements CustomEvent @entity {
    "proposer"
    from: Bytes!
 
-   "Optional: to - empty here"
-   to: Bytes
+   "anyone, including 'from' who is involved/queriable"
+   involved: [Bytes!]
 
    "The candidate slug, together with the proposer account makes the candidate's unique key"
    slug: String!
@@ -255,8 +255,8 @@ type CustomFeedbackEvent implements CustomEvent @entity {
    "proposer"
    from: Bytes!
 
-   "Optional: to - empty here"
-   to: Bytes
+   "anyone, including 'from' who is involved/queriable"
+   involved: [Bytes!]
 
    "whether the proposal is a candidate or not"
    candidate: Boolean!
@@ -290,8 +290,8 @@ type CustomForkEvent implements CustomEvent @entity {
    "proposer"
    from: Bytes!
 
-   "Optional: to - empty here"
-   to: Bytes
+   "anyone, including 'from' who is involved/queriable"
+   involved: [Bytes!]
 
    "id fork joining or withdrawing"
    forkID: BigInt!

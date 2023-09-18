@@ -43,6 +43,7 @@ export function handleProposalCandidateCreated(event: ProposalCandidateCreated):
    customCandidate.block = event.block.number;
    customCandidate.timestamp = event.block.timestamp;
    customCandidate.from = event.params.msgSender;
+   customCandidate.involved = [event.params.msgSender];
    customCandidate.slug = event.params.slug;
    customCandidate.targets = changetype<Bytes[]>(event.params.targets);
    customCandidate.values = event.params.values;
@@ -91,6 +92,7 @@ export function handleProposalCandidateUpdated(event: ProposalCandidateUpdated):
    customCandidate.block = event.block.number;
    customCandidate.timestamp = event.block.timestamp;
    customCandidate.from = event.params.msgSender;
+   customCandidate.involved = [event.params.msgSender];
    customCandidate.slug = event.params.slug;
    customCandidate.targets = changetype<Bytes[]>(event.params.targets);
    customCandidate.values = event.params.values;
@@ -191,6 +193,7 @@ export function handleFeedbackSent(event: FeedbackSent): void {
    customFeedback.block = event.block.number;
    customFeedback.timestamp = event.block.timestamp;
    customFeedback.from = event.params.msgSender;
+   customFeedback.involved = [event.params.msgSender];
    customFeedback.candidate = false;
    customFeedback.propID = event.params.proposalId.toString();
    customFeedback.votes = delegate.delegatedVotes;
@@ -227,6 +230,7 @@ export function handleCandidateFeedbackSent(event: CandidateFeedbackSent): void 
    customFeedback.block = event.block.number;
    customFeedback.timestamp = event.block.timestamp;
    customFeedback.from = event.params.msgSender;
+   customFeedback.involved = [event.params.msgSender];
    customFeedback.candidate = true;
    customFeedback.propID = event.params.slug;
    customFeedback.votes = delegate.delegatedVotes;
