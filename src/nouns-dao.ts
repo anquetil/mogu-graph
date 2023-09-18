@@ -119,6 +119,7 @@ export function handleProposalCreated(parsedProposal: ParsedProposalV3): void {
       .concat('-')
       .concat(parsedProposal.id.toString()));
    
+   customPropose.eventName = "customPropose";
    customPropose.hash = parsedProposal.createdTransactionHash;
    customPropose.block = parsedProposal.createdBlock;
    customPropose.timestamp = parsedProposal.createdTimestamp;
@@ -290,6 +291,7 @@ export function handleVoteCast(event: VoteCast): void {
       .concat('-')
       .concat(event.params.proposalId.toString()));
    
+   customVote.eventName = "customVote";
    customVote.hash = event.transaction.hash
    customVote.block = event.block.number
    customVote.timestamp = event.block.timestamp
@@ -453,6 +455,8 @@ export function handleEscrowedToFork(event: EscrowedToFork): void {
       .toHexString()
       .concat('-')
       .concat(event.params.forkId.toString()));
+   
+   customFork.eventName = "customFork";
    customFork.hash = event.transaction.hash;
    customFork.block = event.block.number;
    customFork.timestamp = event.block.timestamp;
@@ -495,6 +499,8 @@ export function handleWithdrawFromForkEscrow(event: WithdrawFromForkEscrow): voi
       .toHexString()
       .concat('-')
       .concat(event.params.forkId.toString()));
+
+   customFork.eventName = "customFork";
    customFork.hash = event.transaction.hash;
    customFork.block = event.block.number;
    customFork.timestamp = event.block.timestamp;

@@ -2,6 +2,9 @@ interface CustomEvent @entity {
    "Unique id (hash + TBD)"
    id: ID!
 
+   "same as typename, for querying"
+   eventName: String!
+
    "Hash"
    hash: Bytes!
 
@@ -21,6 +24,9 @@ interface CustomEvent @entity {
 type CustomVoteEvent implements CustomEvent @entity {
    "Unique id (hash + prop)"
    id: ID!
+
+   "same as typename, for querying"
+   eventName: String!
 
    "Hash"
    hash: Bytes!
@@ -54,6 +60,9 @@ type CustomBidEvent implements CustomEvent @entity {
    "Unique id (hash + Noun)"
    id: ID!
 
+   "same as typename, for querying"
+   eventName: String!
+
    "Hash"
    hash: Bytes!
 
@@ -79,6 +88,9 @@ type CustomBidEvent implements CustomEvent @entity {
 type CustomWonAuctionEvent implements CustomEvent @entity {
    "Unique id (hash + 'w' + Noun)"
    id: ID!
+
+   "same as typename, for querying"
+   eventName: String!
 
    "Hash"
    hash: Bytes!
@@ -106,6 +118,9 @@ type CustomTransferEvent implements CustomEvent @entity {
    "Unique id (hash + 't' + noun)"
    id: ID!
 
+   "same as typename, for querying"
+   eventName: String!
+
    "Hash"
    hash: Bytes!
 
@@ -128,6 +143,9 @@ type CustomTransferEvent implements CustomEvent @entity {
 type CustomDelegateEvent implements CustomEvent @entity {
    "Unique id (hash + votes)"
    id: ID!
+
+   "same as typename, for querying"
+   eventName: String!
 
    "Hash"
    hash: Bytes!
@@ -157,6 +175,9 @@ type CustomDelegateEvent implements CustomEvent @entity {
 type CustomProposeEvent implements CustomEvent @entity {
    "Unique id (hash + TBD)"
    id: ID!
+
+   "same as typename, for querying"
+   eventName: String!
 
    "Hash"
    hash: Bytes!
@@ -198,6 +219,9 @@ type CustomProposeEvent implements CustomEvent @entity {
 type CustomCandidateEvent implements CustomEvent @entity {
    "Unique id (hash + slug)"
    id: ID!
+
+   "same as typename, for querying"
+   eventName: String!
 
    "Hash"
    hash: Bytes!
@@ -243,6 +267,9 @@ type CustomFeedbackEvent implements CustomEvent @entity {
    "Unique id (hash + prop id/slug)"
    id: ID!
 
+   "same as typename, for querying"
+   eventName: String!
+
    "Hash"
    hash: Bytes!
 
@@ -278,6 +305,9 @@ type CustomForkEvent implements CustomEvent @entity {
    "Unique id (hash + prop id/slug)"
    id: ID!
 
+   "same as typename, for querying"
+   eventName: String!
+   
    "Hash"
    hash: Bytes!
 

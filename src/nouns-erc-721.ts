@@ -67,6 +67,7 @@ export function handleDelegateChanged(event: DelegateChanged): void {
       .concat('-')
       .concat(accountNouns.length.toString()));
 
+   customDelegate.eventName = "customDelegate";
    customDelegate.hash = event.transaction.hash;
    customDelegate.block = event.block.number;
    customDelegate.timestamp = event.block.timestamp;
@@ -139,6 +140,7 @@ export function handleTransfer(event: Transfer): void {
       .concat('-t-')
       .concat(event.params.tokenId.toString()));
 
+   customTransfer.eventName = "customTransfer";
    customTransfer.hash = event.transaction.hash
    customTransfer.block = event.block.number
    customTransfer.timestamp = event.block.timestamp

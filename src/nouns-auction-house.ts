@@ -54,6 +54,7 @@ export function handleAuctionBid(event: AuctionBid): void {
       .concat('-')
       .concat(event.params.nounId.toString()));
 
+   customBid.eventName = "customBid";
    customBid.hash = event.transaction.hash
    customBid.block = event.block.number
    customBid.timestamp = event.block.timestamp
@@ -111,6 +112,7 @@ export function handleAuctionSettled(event: AuctionSettled): void {
       .concat('-w-')
       .concat(event.params.nounId.toString()));
 
+   customWon.eventName = "customWon";
    customWon.hash = event.transaction.hash
    customWon.block = event.block.number
    customWon.timestamp = event.block.timestamp

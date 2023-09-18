@@ -46,6 +46,19 @@ export class CustomVoteEvent extends Entity {
     this.set("id", Value.fromString(value));
   }
 
+  get eventName(): string {
+    let value = this.get("eventName");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set eventName(value: string) {
+    this.set("eventName", Value.fromString(value));
+  }
+
   get hash(): Bytes {
     let value = this.get("hash");
     if (!value || value.kind == ValueKind.NULL) {
@@ -207,6 +220,19 @@ export class CustomBidEvent extends Entity {
     this.set("id", Value.fromString(value));
   }
 
+  get eventName(): string {
+    let value = this.get("eventName");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set eventName(value: string) {
+    this.set("eventName", Value.fromString(value));
+  }
+
   get hash(): Bytes {
     let value = this.get("hash");
     if (!value || value.kind == ValueKind.NULL) {
@@ -343,6 +369,19 @@ export class CustomWonAuctionEvent extends Entity {
     this.set("id", Value.fromString(value));
   }
 
+  get eventName(): string {
+    let value = this.get("eventName");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set eventName(value: string) {
+    this.set("eventName", Value.fromString(value));
+  }
+
   get hash(): Bytes {
     let value = this.get("hash");
     if (!value || value.kind == ValueKind.NULL) {
@@ -476,6 +515,19 @@ export class CustomTransferEvent extends Entity {
     this.set("id", Value.fromString(value));
   }
 
+  get eventName(): string {
+    let value = this.get("eventName");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set eventName(value: string) {
+    this.set("eventName", Value.fromString(value));
+  }
+
   get hash(): Bytes {
     let value = this.get("hash");
     if (!value || value.kind == ValueKind.NULL) {
@@ -594,6 +646,19 @@ export class CustomDelegateEvent extends Entity {
 
   set id(value: string) {
     this.set("id", Value.fromString(value));
+  }
+
+  get eventName(): string {
+    let value = this.get("eventName");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set eventName(value: string) {
+    this.set("eventName", Value.fromString(value));
   }
 
   get hash(): Bytes {
@@ -740,6 +805,19 @@ export class CustomProposeEvent extends Entity {
 
   set id(value: string) {
     this.set("id", Value.fromString(value));
+  }
+
+  get eventName(): string {
+    let value = this.get("eventName");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set eventName(value: string) {
+    this.set("eventName", Value.fromString(value));
   }
 
   get hash(): Bytes {
@@ -954,6 +1032,19 @@ export class CustomCandidateEvent extends Entity {
 
   set id(value: string) {
     this.set("id", Value.fromString(value));
+  }
+
+  get eventName(): string {
+    let value = this.get("eventName");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set eventName(value: string) {
+    this.set("eventName", Value.fromString(value));
   }
 
   get hash(): Bytes {
@@ -1183,6 +1274,19 @@ export class CustomFeedbackEvent extends Entity {
     this.set("id", Value.fromString(value));
   }
 
+  get eventName(): string {
+    let value = this.get("eventName");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set eventName(value: string) {
+    this.set("eventName", Value.fromString(value));
+  }
+
   get hash(): Bytes {
     let value = this.get("hash");
     if (!value || value.kind == ValueKind.NULL) {
@@ -1355,6 +1459,19 @@ export class CustomForkEvent extends Entity {
 
   set id(value: string) {
     this.set("id", Value.fromString(value));
+  }
+
+  get eventName(): string {
+    let value = this.get("eventName");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set eventName(value: string) {
+    this.set("eventName", Value.fromString(value));
   }
 
   get hash(): Bytes {

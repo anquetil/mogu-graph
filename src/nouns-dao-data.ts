@@ -39,6 +39,7 @@ export function handleProposalCandidateCreated(event: ProposalCandidateCreated):
       .concat('-')
       .concat(event.params.slug.toString()));
 
+   customCandidate.eventName = "customCandidate";
    customCandidate.hash = event.transaction.hash;
    customCandidate.block = event.block.number;
    customCandidate.timestamp = event.block.timestamp;
@@ -88,6 +89,7 @@ export function handleProposalCandidateUpdated(event: ProposalCandidateUpdated):
       .concat('-')
       .concat(event.params.slug.toString()));
 
+   customCandidate.eventName = "customCandidate";
    customCandidate.hash = event.transaction.hash;
    customCandidate.block = event.block.number;
    customCandidate.timestamp = event.block.timestamp;
@@ -189,6 +191,7 @@ export function handleFeedbackSent(event: FeedbackSent): void {
       .concat('-')
       .concat(event.params.proposalId.toString()));
 
+   customFeedback.eventName = "customFeedback";
    customFeedback.hash = event.transaction.hash;
    customFeedback.block = event.block.number;
    customFeedback.timestamp = event.block.timestamp;
@@ -226,6 +229,7 @@ export function handleCandidateFeedbackSent(event: CandidateFeedbackSent): void 
       .concat('-')
       .concat(event.params.slug.toString()));
 
+   customFeedback.eventName = "customFeedback";
    customFeedback.hash = event.transaction.hash;
    customFeedback.block = event.block.number;
    customFeedback.timestamp = event.block.timestamp;
